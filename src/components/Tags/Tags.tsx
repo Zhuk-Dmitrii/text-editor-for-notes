@@ -1,4 +1,4 @@
-export function Tags(): JSX.Element {
+export function Tags() {
    return (
       <div className="d-flex flex-column w-25">
          <h3 className="mb-3 text-center">Tags</h3>

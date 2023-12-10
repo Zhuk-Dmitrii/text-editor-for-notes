@@ -1,19 +1,22 @@
 import { useState } from 'react'
+import { Form } from '../Form/Form.tsx'
 import { Tags } from '../Tags/Tags.tsx'
 import { List } from '../List/List.tsx'
+import { ListItem } from '../ListItem/ListItem.tsx'
+import { IListItem } from '../../types/interfaces.ts'
 
-export function Layout(): JSX.Element {
-   const [note, setNote] = useState([])
-   const [text, setText] = useState('')
+export function Layout() {
+   const [note, setNote] = useState<IListItem[]>([])
+   const [text, setText] = useState<string>('')
 
-   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
       setText(event.target.value)
    }
 
-   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
       event.preventDefault()
 
-      const data = {
+      const data: IListItem = {
          id: Date.now(),
          text,
       }
@@ -22,28 +25,17 @@ export function Layout(): JSX.Element {
       setText('')
    }
 
+   function handleDeleteItem(id: number): void {
+      setNote(note.filter(item => item.id !== id))
+   }
+
    return (
       <div className="container d-flex flex-column min-vh-100 bg-danger">
-         <form className="d-flex mt-5" onSubmit={handleSubmit}>
-            <input
-               className="form-control flex-grow-1 me-3"
-               type="text" placeholder="Enter your note"
-               onChange={handleChange}
-               value={text}
-            />
-            <button type='submit' className="btn btn-primary" style={{ width: '150px' }}>Add note</button>
-         </form>
+        <Form submit={handleSubmit} change={handleChange} value={text} />
          <div className="d-flex mt-5">
             <Tags />
             <List>
-               {note.map((item) => {
-                  return (
-                     <li key={item.id} className="d-flex justify-content-between align-items-center">
-                        <p className="me-3">{item.text}</p>
-                        <button className="btn btn-danger">Delete</button>
-                     </li>
-                  )
-               })}
+               {note.map(item => <ListItem key={item.id} id={item.id} text={item.text} deleteNote={handleDeleteItem}/>)}
             </List>
          </div>
       </div>

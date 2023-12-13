@@ -4,8 +4,8 @@ export function getTag(text: string): string[] {
 
    for (let i = 0; i < words.length; i++) {
       if (words[i].includes('#')) {
-         const startIndex: number = words[i].indexOf('#')
-         tag.push(words[i].slice(startIndex))
+         const index: number = words[i].indexOf('#')
+         tag.push(words[i].slice(index))
       }
    }
 

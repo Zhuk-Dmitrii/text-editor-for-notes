@@ -6,7 +6,7 @@ interface FormProps {
 
 export function Form({submit, change, value}: FormProps) {
    return (
-      <form className="d-flex mt-5" onSubmit={(e) => submit(e) }>
+      <form className="d-flex mt-5" onSubmit={submit}>
          <input
             className="form-control flex-grow-1 me-3"
             type="text"

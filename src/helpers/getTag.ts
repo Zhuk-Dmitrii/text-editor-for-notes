@@ -1,11 +1,11 @@
-export function getTag(text: string): string {
+export function getTag(text: string): string[] {
    const words: string[] = text.split(' ')
-   let tag: string = ''
+   const tag: string[] = []
 
    for (let i = 0; i < words.length; i++) {
       if (words[i].includes('#')) {
          const startIndex: number = words[i].indexOf('#')
-         tag = words[i].slice(startIndex)
+         tag.push(words[i].slice(startIndex))
       }
    }
 

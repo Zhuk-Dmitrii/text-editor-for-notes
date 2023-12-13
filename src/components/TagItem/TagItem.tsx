@@ -5,10 +5,9 @@ interface TagItemProps {
 
 export function TagItem({id, tag}: TagItemProps) {
    return (
-      <li key={id}>
-         <input type="checkbox" id={String(id)} />
-         <label htmlFor={String(id)}>{tag}</label>
-         <button className="btn btn-danger">x</button>
+      <li key={id} className="d-flex align-items-center">
+         <input type="checkbox" id={String(id)}/>
+         <label htmlFor={String(id)} className="ms-3 text-primary">{tag}</label>
       </li>
    )
 }
